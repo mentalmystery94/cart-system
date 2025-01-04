@@ -1,7 +1,8 @@
-// App.js
-import { React, useState } from "react";
+import React, { useState } from "react";
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
+import Checkout from "./components/Checkout";
+import ConfirmationPage from "./components/ConfirmationPage";
 import './App.css';
 
 // Sample product data
@@ -27,33 +28,13 @@ const sampleProducts = [
     price: 109.99,
     image: './images/shirt3.jpg'
   },
-  {
-    id: 4,
-    title: 'Ralph Lauren Jeans',
-    description: 'Comfortable fit jeans',
-    price: 89.99,
-    image: './images/shirt4.jpg'
-  },
-  {
-    id: 5,
-    title: 'Ralph Lauren Dress',
-    description: 'Elegant dress for special occasions',
-    price: 59.99,
-    image: './images/shirt5.jpg'
-  },
-  {
-    id: 6,
-    title: 'Ralph Lauren Sweater',
-    description: 'Cozy and warm sweater',
-    price: 99.99,
-    image: './images/shirt6.jpg'
-  },
+
   // Add more sample products as needed
 ];
 
-
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [page, setPage] = useState('home'); // State to handle page navigation
 
   const addToCart = (product) => {
     setCartItems(prevItems => [...prevItems, product]);
@@ -63,10 +44,27 @@ function App() {
     setCartItems(prevItems => prevItems.filter(item => item.id !== product.id));
   };
 
+  const handleCheckout = () => {
+    console.log('Checking out with items:', cartItems);
+    setCartItems([]);
+    setPage('confirmation'); // Navigate to confirmation page
+  };
+
+  const handleNavigation = (targetPage) => {
+    setPage(targetPage); // Navigate to the target page
+  };
+
   return (
-    <div className="app"> 
-      <ProductList products={sampleProducts} addToCart={addToCart} />
-      <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+    <div className="app">
+      {page === 'home' && <ProductList products={sampleProducts} addToCart={addToCart} />}
+      {page === 'cart' && <Cart cartItems={cartItems} removeFromCart={removeFromCart} />}
+      {page === 'checkout' && <Checkout cartItems={cartItems} handleCheckout={handleCheckout} />}
+      {page === 'confirmation' && <ConfirmationPage />}
+      <nav>
+        <button onClick={() => handleNavigation('home')}>Home</button>
+        <button onClick={() => handleNavigation('cart')}>Cart</button>
+        <button onClick={() => handleNavigation('checkout')}>Checkout</button>
+      </nav>
     </div>
   );
 }

@@ -9,7 +9,7 @@ function Product({ product, addToCart }) {
       <img src={product.image} alt={product.title} className="product__image" />
       <h3 className="product__title">{product.title}</h3>
       <p className="product__description">{product.description}</p>
-      <p className="product__price">${product.price}</p>
+      <p className="product__price">€{product.price}</p>
       <button className="product__button" onClick={() => addToCart(product)}>Add to Cart</button>
     </div>
   );

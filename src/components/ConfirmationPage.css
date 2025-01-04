@@ -1,0 +1,29 @@
+.confirmation-page {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .confirmation-page h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .confirmation-page p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .confirmation-page a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .confirmation-page a:hover {
+    background-color: #0056b3;
+  }
+  
